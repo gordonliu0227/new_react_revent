@@ -36,7 +36,7 @@ export default function EventListItem({ event, selectEvent, deleteEvent }) {
         <div>{event.description}</div>
         <Button
           as={Link}
-          to={'/events/${event.id}'}
+          to={`/events/${event.id}`}
 
           color="teal"
           floated="right"

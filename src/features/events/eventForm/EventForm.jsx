@@ -100,7 +100,7 @@ export default function EventForm({
           type="submit"
           floated="right"
           content="Cancle"
-          as={Link} to={'/event'}
+          as={Link} to='/events'
         />
       </Form>
     </Segment>

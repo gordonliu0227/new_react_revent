@@ -6,6 +6,7 @@ import EventDetailedPage from "../../features/events/eventDetailed/EventDetailed
 import EventForm from "../../features/events/eventForm/EventForm";
 import HomePage from "../../features/home/HomePage";
 import NavBar from "../../features/nav/NavBar";
+import sandBox from "../../features/sandbox/Sandbox";
 
 function App() {
   
@@ -21,6 +22,7 @@ function App() {
               <Route exact path="/events" component={EventDashboard} />
               <Route path="/events/:id" component={EventDetailedPage} />
               <Route path={['/createEvent','/manage/:id']} component={EventForm} />
+              <Route exact path="/sandbox" component={sandBox} />
             </Container>
           </>
         )}
