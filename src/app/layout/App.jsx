@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router";
+import { Route, useLocation } from "react-router";
 import { Container } from "semantic-ui-react";
 import EventDashboard from "../../features/events/eventDashboard/EventDashboard";
 import EventDetailedPage from "../../features/events/eventDetailed/EventDetailedPage";
@@ -9,7 +9,8 @@ import NavBar from "../../features/nav/NavBar";
 import sandBox from "../../features/sandbox/Sandbox";
 
 function App() {
-  
+  const { key } = useLocation();
+
   return (
     <div>
       <Route exact path="/" component={HomePage} />
@@ -17,11 +18,15 @@ function App() {
         path={"/(.+)"}
         render={() => (
           <>
-            <NavBar  />
+            <NavBar />
             <Container className="main">
               <Route exact path="/events" component={EventDashboard} />
               <Route path="/events/:id" component={EventDetailedPage} />
-              <Route path={['/createEvent','/manage/:id']} component={EventForm} />
+              <Route
+                path={["/createEvent", "/manage/:id"]}
+                component={EventForm}
+                key={key}
+              />
               <Route exact path="/sandbox" component={sandBox} />
             </Container>
           </>
