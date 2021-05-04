@@ -1,12 +1,16 @@
 import cuid from "cuid";
 import React from "react";
 import { Link } from "react-router-dom";
-import { Segment, Header, Button, } from "semantic-ui-react";
+import { Segment, Header, Button } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateEvent, createEvent } from "../eventActions";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
+import MyTestArea from "../../../app/common/form/MyTestArea";
+import MySelectInput from "../../../app/common/form/MySelectInput";
+import { categoryData } from "../../../app/api/categpryOptions";
+import MyDateInput from "../../../app/common/form/MyDateInput";
 
 export default function EventForm({ match, history }) {
   const dispatch = useDispatch();
@@ -27,7 +31,7 @@ export default function EventForm({ match, history }) {
 
     category: Yup.string().required("You must provide a category"),
 
-    descriptrion: Yup.string().required("You must provide a descriptrion"),
+    description: Yup.string().required("You must provide a descriptrion"),
 
     city: Yup.string().required("You must provide a city"),
 
@@ -55,25 +59,38 @@ export default function EventForm({ match, history }) {
           history.push("/events");
         }}
       >
-        <Form className="ui form">
+      {({isSubmitting, dirty, isValid})=>(<Form className="ui form">
           <Header sub content="Event Details" color="teal" />
           <MyTextInput name="title" placeholder="Event Title" />
-          <MyTextInput name="category" placeholder="Category" />
-          <MyTextInput name="description" placeholder="Description" />
+          <MySelectInput
+            name="category"
+            placeholder="Category"
+            options={categoryData}
+          />
+          <MyTestArea name="description" placeholder="Description" rows={3} />
           <Header sub content="Event Location Details" color="teal" />
           <MyTextInput name="city" placeholder="City" />
           <MyTextInput name="venue" placeholder="Venue" />
-          <MyTextInput name="date" placeholder="Event date" type="date" />
+          <MyDateInput
+            name="date"
+            placeholderText="Event date"
+            timeFormat="HH:mm"
+            showTimeSelect
+            timeCaption="time"
+            dateFormat="MMMM d, yyyy h:mm a"
+          />
 
-          <Button type="submit" floated="right" positive content="Submit" />
+          <Button type="submit" floated="right" positive content="Submit" loading={isSubmitting} disabled={!isValid || !dirty || isSubmitting} />
           <Button
+          disabled={isSubmitting}
             type="submit"
             floated="right"
             content="Cancle"
             as={Link}
             to="/events"
           />
-        </Form>
+        </Form>)}
+        
       </Formik>
     </Segment>
   );
