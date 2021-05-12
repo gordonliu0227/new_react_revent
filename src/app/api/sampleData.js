@@ -14,7 +14,7 @@ export const sampleData = [
         },
         venue: {
             address: 'Empire State Building, 5th Avenue, New York, NY, USA',
-            latlng: {
+            latLng: {
                 lat: 40.7484405,
                 lng:  -73.98566440000002
             }
@@ -49,7 +49,7 @@ export const sampleData = [
         },
         venue: {
             address: 'Punch & Judy, Henrietta Street, London, UK',
-            latlng: {
+            latLng: {
                 lat: 51.5118074,
                 lng: -0.12300089999996544
             }
